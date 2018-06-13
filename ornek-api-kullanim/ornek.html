@@ -1,0 +1,14 @@
+<script type="text/javascript">
+	function getSummary(){
+		var context = document.getElementById("contextOfText").value
+		$.ajax({
+			type:"POST",
+			url: "http://localhost:9999/ozetle/api/new",
+			dataType: 'json',
+            data: JSON.stringify({ contextOfText: context}),
+			success: function(data) {
+			console.log(data);
+			}
+		});
+	}
+</script>
