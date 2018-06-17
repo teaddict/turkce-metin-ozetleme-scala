@@ -36,23 +36,5 @@ class SummaryFeatureTest extends FeatureTest with Mockito {
         andExpect = Ok
       )
     }
-    "context of text can not be empty" in {
-      server.httpPost(
-        path = "/ozetle/api/new",
-        postBody =
-          """
-            {
-              "contextOfText" : ""
-            }
-          """,
-        withJsonBody =
-          s"""{
-             "errors": [
-                "contextOfText: cannot be empty"
-              ]
-            }""",
-        andExpect = Status.BadRequest
-      )
-    }
   }
 }
