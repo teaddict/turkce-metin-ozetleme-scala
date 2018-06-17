@@ -8,13 +8,11 @@ services:
             - mongo:mongo
         depends_on:
             - mongo
-        mem_limit: 2000m
         restart: always
     mongo:
-        image: mongo
+        image: ivanmarban/armhf-mongodb
         ports:
             - "27017:27017"
         volumes:
             - ./summarydb:/data/db            
-        mem_limit: 2000m
         restart: always
