@@ -15,7 +15,7 @@ class ExtractSentenceServiceTest extends FunSpec {
       val members = Seq((lexical1,"hypernymy","taşıt"),
                         (lexical2,"hypernymy","taşıt"),
                         (lexical3,"hypernymy","taşıt"))
-      val chain = new Chain(members = members)
+      val chain = Chain(members = members)
 
       val lexical4 = new Lexical("çay",4,2)
       val lexical5 = new Lexical("kahve",5,2)
@@ -23,7 +23,7 @@ class ExtractSentenceServiceTest extends FunSpec {
       val members2 = Seq((lexical4,"hypernymy","içecek"),
                         (lexical5,"hypernymy","içecek"),
                         (lexical6,"hypernymy","içecek"))
-      val secondChain = new Chain(members = members2)
+      val secondChain = Chain(members = members2)
 
       val sentences = Seq("Bazı insanlar kendi arabalarıyla yolculuk etmeyi sever.",
                           "Bazı insanlarsa otobüsle yolculuktan hoşlanır.",

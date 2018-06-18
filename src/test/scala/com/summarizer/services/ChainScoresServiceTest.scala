@@ -11,7 +11,7 @@ class ChainScoresServiceTest extends FlatSpec {
   val members = Seq((lexical1,"hypernymy","taşıt"),
                     (lexical2,"hypernymy","taşıt"),
                     (lexical3,"hypernymy","taşıt"))
-  val chain = new Chain(members = members)
+  val chain = Chain(members = members)
 
   val chainScoresService = new DefaultChainScoresService
 
@@ -40,8 +40,8 @@ class ChainScoresServiceTest extends FlatSpec {
                        (lexical5,"hypernymy","kişi"),
                        (lexical6,"synonymy","kişi"))
 
-    val chain1 = new Chain(score = 12, strength =0.99999999999, members = members)
-    val chain2 = new Chain(score = 18, members = members2)
+    val chain1 = Chain(score = 12, strength =0.99999999999, members = members)
+    val chain2 = Chain(score = 18, members = members2)
 
     val result = chainScoresService.getStrongChains(Seq(chain1,chain2))
     val expectedResult = Seq(chain1)

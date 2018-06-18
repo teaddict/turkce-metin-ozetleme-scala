@@ -2,15 +2,15 @@ package com.summarizer.domain
 
 class Lexical(word: String, sentenceNo: Int, paragraphNo: Int) {
 
-  def getWord () : String = {
+  def getWord(): String = {
     word
   }
 
-  def getSentenceNo () : Int = {
+  def getSentenceNo(): Int = {
     sentenceNo
   }
 
-  def getParagraphNo () : Int = {
+  def getParagraphNo(): Int = {
     paragraphNo
   }
 

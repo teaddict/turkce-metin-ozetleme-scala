@@ -24,12 +24,12 @@ class DefaultSemanticListParserService extends SemanticListParserService {
     var relations: Seq[String] = Seq.empty[String]
     var relationMap: Map[String,Seq[String]] = Map.empty[String,Seq[String]]
 
-    var word = file(0).split(":")(0)
-    relations = relations :+ file(0)
+    var word = file.head.split(":")(0)
+    relations = relations :+ file.head
 
     for( index <- 1 until file.size) {
 
-      var previousWord = file(index-1).split(":")(0)
+      val previousWord = file(index-1).split(":")(0)
       word = file(index).split(":")(0)
       if(word == previousWord) {
         relations = relations :+ file(index)

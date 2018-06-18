@@ -1,7 +1,6 @@
 package com.summarizer.services
 
 import org.scalatest.FunSpec
-import zemberek.tokenization.{TurkishSentenceExtractor}
 
 class VerbServiceTest extends FunSpec with CommonServices {
 
@@ -11,8 +10,8 @@ class VerbServiceTest extends FunSpec with CommonServices {
   describe("Get verbs") {
     it("should return all verbs") {
       val text = paragraph1.concat(paragraph2)
-      val verbs = verbService.getVerbs(text)
-      val result = Seq("yenmek", "olmak", "etmek", "yapmak", "düzmek", "elemek", "geçmek", "katılmak")
+      val verbs = verbService.getVerbs(text).toSeq
+      val result = Seq("yemek", "olmak", "etmek", "yapmak", "düzmek", "elemek", "geçmek", "katılmak")
 
       assert(verbs === result)
     }

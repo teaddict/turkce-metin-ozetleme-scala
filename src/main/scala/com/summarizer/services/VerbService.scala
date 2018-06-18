@@ -38,7 +38,7 @@ class DefaultVerbService @Inject() (sentenceService: SentenceService,
     var verbs : Seq[String] = Seq.empty[String]
     for(word : SingleAnalysis <- analysis.bestAnalysis().asScala) {
       if(word.formatLong().contains("Verb")) {
-        verbs = verbs :+ word.getDictionaryItem().lemma
+        verbs = verbs :+ word.getDictionaryItem.lemma
       }
     }
     verbs

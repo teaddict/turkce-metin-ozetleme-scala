@@ -56,7 +56,7 @@ class DefaultLexicalChainService extends LexicalChainService with Logging {
               val result = semanticRelation.split(":")
               val relationType = result(1)
               val relatedWord = result(2)
-              chains = chains :+ new Chain(None, 0, 0.0, Seq((lexical, relationType, relatedWord)))
+              chains = chains :+ Chain(None, 0, 0.0, Seq((lexical, relationType, relatedWord)))
             }
           }
           case None =>
@@ -73,7 +73,6 @@ class DefaultLexicalChainService extends LexicalChainService with Logging {
               case Some(semanticRelations) => {
                 for (semanticRelation <- semanticRelations) {
                   val result = semanticRelation.split(":")
-                  val semanticWord = result(0)
                   val semanticRelationType = result(1)
                   val semanticRelatedWord = result(2)
                   val chainsIncludesSemanticRelatedWord = chains.filter(chain => chain.members.exists(member => member._3 == semanticRelatedWord))
@@ -82,7 +81,7 @@ class DefaultLexicalChainService extends LexicalChainService with Logging {
                       chainIncludesSemanticRelatedWord.addLexicalToChain(lexical,semanticRelationType,semanticRelatedWord)
                     }
                   } else {
-                    tempChains = tempChains :+ new Chain(None, 0, 0.0, Seq((lexical, semanticRelationType, semanticRelatedWord)))
+                    tempChains = tempChains :+ Chain(None, 0, 0.0, Seq((lexical, semanticRelationType, semanticRelatedWord)))
                   }
                 }
               }
@@ -90,45 +89,6 @@ class DefaultLexicalChainService extends LexicalChainService with Logging {
             }
             chains ++= tempChains
         }
-
-/*        for ((chain, index) <- existingChains.zipWithIndex) {
-          chain.getMember(lexical) match {
-            case Some(member) =>
-              chain.addLexicalToChain(lexical,member._2,member._3)
-            case None =>
-              wordnet.get(lexical.getWord()) match {
-                case Some(semanticRelations) => {
-                  var tempChains = Buffer.empty[Chain]
-                  println(semanticRelations)
-                  var added = false
-                  for (semanticRelation <- semanticRelations) {
-                    val result = semanticRelation.split(":")
-                    val semanticWord = result(0)
-                    val semanticRelationType = result(1)
-                    val semanticRelatedWord = result(2)
-                    val tempChain = chain.copy()
-                    val exist = tempChain.getMembers.exists(member => member._3 == semanticRelatedWord)
-                    if(exist) {
-                      added = true
-                      tempChain.addLexicalToChain(lexical, semanticRelationType, semanticRelatedWord)
-                      tempChains = tempChains :+ tempChain
-                    } else {
-                      // eger zincirle iliskilendirilemezse yeni zincir baslatilir
-                      val search = new Chain(None,0,0.0,Seq((lexical, semanticRelationType, semanticRelatedWord)))
-                      if(!chains.contains(search)) {
-                        tempChains = tempChains :+ new Chain(None, 0, 0.0, Seq((lexical, semanticRelationType, semanticRelatedWord)))
-                      }
-                    }
-                  }
-                  if(added) {
-                    chains.remove(index)
-                  }
-                  chains ++= tempChains
-                }
-                case None =>
-              }
-          }
-        }*/
       }
     }
     chains

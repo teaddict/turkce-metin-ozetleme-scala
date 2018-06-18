@@ -1,6 +1,6 @@
 package com.summarizer.repositories
 
-import com.google.inject.{Singleton}
+import com.google.inject.Singleton
 import com.summarizer.domain.Summary
 import com.summarizer.modules.DatabaseModule._
 import org.mongodb.scala._

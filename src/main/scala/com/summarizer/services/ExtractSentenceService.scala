@@ -87,7 +87,7 @@ class DefaultExtractSentenceService extends ExtractSentenceService with Logging 
         representativeWords +: lexicals.head.getWord()
       }
       else {
-        val wordsAboveMean = frequencyOfWords.filter((word) => word._2.toDouble >= meanOfFrequency).map(_._1).toSet
+        val wordsAboveMean = frequencyOfWords.filter((word) => word._2.toDouble >= meanOfFrequency).keySet
         val lexicals = chain.members.map(_._1).filter(lexical => wordsAboveMean.contains(lexical.getWord()))
         lexicals.foreach { lexical =>
           if(!representativeWords.contains(lexical.getWord())) {
@@ -101,7 +101,7 @@ class DefaultExtractSentenceService extends ExtractSentenceService with Logging 
       }
     }
     val sortedSelectedSentences = ListMap(selectedSentences.toSeq.sortBy(_._1):_*)
-    val result = sortedSelectedSentences.map(_._2).toSeq
+    val result = sortedSelectedSentences.values.toSeq
     result
   }
 }
