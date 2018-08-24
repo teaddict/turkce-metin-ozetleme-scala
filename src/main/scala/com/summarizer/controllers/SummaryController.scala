@@ -29,7 +29,9 @@ class SummaryController @Inject()(summaryService: SummaryService,
     info("summary post")
     val summaryPostRequest = mapper.readValue(post.getContentString(), classOf[SummaryPostRequest])
     summaryService.create(summaryPostRequest.toDomain).map {
-      case Right(summary) => SummaryPostResponse(summary.summaryOfText)
+      case Right(summary) =>
+        info("summary created")
+        SummaryPostResponse(summary.summaryOfText)
       case Left(error) => response.ok.body("couldn't create summary: " + error)
     }
   }
@@ -43,6 +45,7 @@ class SummaryController @Inject()(summaryService: SummaryService,
     info("get nouns")
     val summaryPostRequest = mapper.readValue(post.getContentString(), classOf[SummaryPostRequest])
     val nouns = nounService.getNouns(summaryPostRequest.toDomain).mkString(",")
+    info("nouns are ready")
     SummaryPostResponse(Some(nouns))
   }
 
@@ -55,6 +58,7 @@ class SummaryController @Inject()(summaryService: SummaryService,
     info("get verbs")
     val summaryPostRequest = mapper.readValue(post.getContentString(), classOf[SummaryPostRequest])
     val verbs = verbService.getVerbs(summaryPostRequest.toDomain).mkString(",")
+    info("verbs are ready")
     SummaryPostResponse(Some(verbs))
   }
 

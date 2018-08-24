@@ -36,8 +36,7 @@ class DefaultSummaryService @Inject()(summaryRepository: SummaryRepository,
             val chainsWithScores = chainScoresService.calculateChainScores(uniqueChains)
             val chainsWithStrengths = chainScoresService.calculateChainStrengths(chainsWithScores)
             val strongChains = chainScoresService.getStrongChains(chainsWithStrengths)
-            println(strongChains.size)
-            strongChains.foreach(chain => println(chain.getChainInformation))
+            info("strongChains.size: " + strongChains.size)
             val extractedSentences = extractSentenceService.heuristic2(strongChains, sentences)
             val summary = new Summary(contextOfText = contextOfText,
               summaryOfText = Some(extractedSentences.mkString),

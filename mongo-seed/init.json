@@ -1,0 +1,14 @@
+[
+  {
+    "contextOfText": "test",
+    "summaryOfText": "test",
+    "wordChain": "test",
+    "filename": "test"
+  },
+  {
+    "contextOfText": "test2",
+    "summaryOfText": "test2",
+    "wordChain": "test2",
+    "filename": "test2"
+  }
+]

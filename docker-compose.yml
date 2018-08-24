@@ -1,5 +1,6 @@
 version: '2'
 services:
+
     turkce-metin-ozetleme-scala:
         build: target/docker/stage
         ports:
@@ -10,6 +11,7 @@ services:
             - mongo
         mem_limit: 2000m
         restart: always
+    
     mongo:
         image: mongo
         ports:
@@ -18,3 +20,8 @@ services:
             - ./summarydb:/data/db            
         mem_limit: 2000m
         restart: always
+    
+    mongo-seed:
+        build: ./mongo-seed
+        links:
+            - mongo
