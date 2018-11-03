@@ -10,19 +10,21 @@ object TurkishLanguageToolsModule extends TwitterModule {
   private val fileService = new DefaultFileService
   private val semanticListParserService = new DefaultSemanticListParserService
 
-  def getSemanticRelationWordList = {
+  private val semanticRelationWordList = {
     val resourcesPath = "lexical/all_relations.csv"
     val file = fileService.readFile(resourcesPath)
     val parsedFile = file.split("\n").toSeq
     val words = semanticListParserService.createWordList(parsedFile)
-    val semanticWordList = semanticListParserService.createRelationList(words, parsedFile)
-    semanticWordList
+    semanticListParserService.createRelationList(words, parsedFile)
   }
 
-  def getStopWordList = {
+  private val stopWordList = {
     val resourcesPath = "lexical/stopwords.csv"
     val file = fileService.readFile(resourcesPath)
-    val stopWords = file.split("\n").toSeq
-    stopWords
+    file.split("\n").toSeq
   }
+
+  def getSemanticRelationWordList : Map[String, Seq[String]] = semanticRelationWordList
+
+  def getStopWordList :  Seq[String] = stopWordList
 }
