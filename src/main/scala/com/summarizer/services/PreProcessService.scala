@@ -34,7 +34,6 @@ class DefaultPreProcessService @Inject()(nounService: NounService,
         words.map(new Lexical(_, sentenceIndexNo, paragraphIndexNo))
       }
     }
-
     lexicals
   }
 }
