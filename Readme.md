@@ -3,7 +3,7 @@ Kelime Zinciri Algoritmasıyla Türkçe Metin Özetleme - SCALA
 ---
 ### NOTLAR
 
-Uzun bir aradan sonra nihayet fırsat bulup projeye geri dönüş yapabildim. Programın ilk sürümü bitirme projesi olduğu için biraz karışık ve aceleyle yazıldı. Büyüzden tüm projeyi scala dilinde yeniden yazdım. Hem daha anlaşılır hem daha kısa ve öz oldu. Spring MVC, Tomcat ve Postgresql üçlüsünü bırakarak , Finatra + Mongodb ikilisine geçtim. 
+Uzun bir aradan sonra nihayet fırsat bulup projeye geri dönüş yapabildim. Programın ilk sürümü bitirme projesi olduğu için biraz karışık ve aceleyle yazıldı. Büyüzden tüm projeyi scala dilinde yeniden yazdım. Hem daha anlaşılır hem daha kısa ve öz oldu. Spring MVC, Tomcat ve Postgresql üçlüsünü bırakarak , Finatra + ~~Mongodb~~ ikilisine geçtim. 
 Şimdi ayrıca docker-compose ile özetleme servisini hızlıca kurabilirsiniz.
 
 Algorıtma olarak çok bir değişiklik yapmadım, sadece daha önce farketmediğim hataları düzelttim, bu da performansı ve özet kalitesini artırdı. Metnin sınıfını bulma işlemini uygulamadan kaldırdım. İlk sürümde deneme amaçlı eklenmişti, suan kullanılmadığı için gerekli olduğunu düşünmüyorum.
@@ -32,6 +32,7 @@ Bu aşamada zincirdeki kelimelerin aralarındaki ilişkiye göre puanlamasını 
 >- hyponymy = 4
 >- related_with =4
 >- holo_part = 4
+>- holo_portion = 4
 >- holo_member = 4
 >- yan_kavram = 4
 
@@ -67,14 +68,16 @@ Proceedings of the ACL Workshop on Intelligent Scalable Text Summarization,(1997
 ##### 
 > **Gereksinimler:** 
 >- JavaSE 1.8
->- MongoDb
+>- ~~MongoDb~~
 >- Docker & Docker Compose
 
 > **Sunucu kurulumu :** 
 >- LINUX
 >- Terminal ile öncelikle uygulama dizinine geciyoruz
->- eger armv7 kullaniyorsak:  sbt 'set dockerBaseImage := "armv7/armhf-java8"' docker:stage
->- eger kullanmiyorsak oracle veya openjdk secebilirsiniz: sbt 'set dockerBaseImage := "nimmis/java:oracle-8-jdk"' docker:stage
+>- eger armv7 kullaniyorsak:  
+    sbt 'set dockerBaseImage := "armv7/armhf-java8"' docker:stage
+>- eger kullanmiyorsak oracle veya openjdk secebilirsiniz:  
+    sbt 'set dockerBaseImage := "nimmis/java:oracle-8-jdk"' docker:stage
 >- sudo docker-compose -f docker-compose.yml up -d --build
 >- localhost:9999 adresinden sunucuya ulasabiliriz
 >- sunucuyu durdurmak icinse
