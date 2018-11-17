@@ -36,7 +36,8 @@ class DefaultChainScoresService extends ChainScoresService with Logging {
           sumScore += 7
         } else if (relation.equals("hypernymy") || relation.equals("hyponymy")
           || relation.equals("related_with") || relation.equals("holo_part")
-          || relation.equals("holo_member") || relation.equals("yan_kavram")) {
+          || relation.equals("holo_member")  || relation.equals("yan_kavram")
+          || relation.equals("holo_portion")) {
           sumScore += 4
         }
       }

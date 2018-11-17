@@ -22,32 +22,28 @@ class DefaultSummaryService @Inject()(summaryRepository: SummaryRepository,
 
   override def create(contextOfText: String): Future[Either[String, Summary]] = {
     info("Summary service create")
-    summaryRepository.findByContextOfText(contextOfText).flatMap {
-      case Some(result) => Future(Right(result))
-      case None =>
-        try {
-          val sentences = sentenceService.getSentences(contextOfText)
-          val lexicals = preProcessService.getAllLexicals(contextOfText)
-          val chains = lexicalChainService.buildChains(lexicals)
-          if(chains.isEmpty) {
-            Future(Left("Summarizer can't create summary!"))
-          } else {
-            val uniqueChains = lexicalChainService.chainAnalyse(chains)
-            val chainsWithScores = chainScoresService.calculateChainScores(uniqueChains)
-            val chainsWithStrengths = chainScoresService.calculateChainStrengths(chainsWithScores)
-            val strongChains = chainScoresService.getStrongChains(chainsWithStrengths)
-            info("strongChains.size: " + strongChains.size)
-            val extractedSentences = extractSentenceService.heuristic2(strongChains, sentences)
-            val summary = new Summary(contextOfText = contextOfText,
-              summaryOfText = Some(extractedSentences.mkString),
-              wordChain = Some(strongChains.flatMap(_.getChainInformation).mkString))
-            summaryRepository.save(summary)
-            Future(Right(summary))
-          }
-        }
-        catch {
-          case e: Throwable => Future(Left(e.getMessage))
-        }
+    try {
+      val sentences = sentenceService.getSentences(contextOfText)
+      val lexicals = preProcessService.getAllLexicals(contextOfText)
+      val chains = lexicalChainService.buildChains(lexicals)
+      if (chains.isEmpty) {
+        Future(Left("Summarizer can't create summary!"))
+      } else {
+        val uniqueChains = lexicalChainService.chainAnalyse(chains)
+        val chainsWithScores = chainScoresService.calculateChainScores(uniqueChains)
+        val chainsWithStrengths = chainScoresService.calculateChainStrengths(chainsWithScores)
+        val strongChains = chainScoresService.getStrongChains(chainsWithStrengths)
+        info("strongChains.size: " + strongChains.size)
+        val extractedSentences = extractSentenceService.heuristic2(strongChains, sentences)
+        val summary = new Summary(contextOfText = contextOfText,
+          summaryOfText = Some(extractedSentences.mkString(" ")),
+          wordChain = Some(strongChains.flatMap(_.getChainInformation).mkString))
+        Future(Right(summary))
+      }
     }
+    catch {
+      case e: Throwable => Future(Left(e.getMessage))
+    }
+
   }
 }

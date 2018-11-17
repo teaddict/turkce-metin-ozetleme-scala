@@ -4,15 +4,5 @@ services:
         build: target/docker/stage
         ports:
             - "9999:9999"
-        links:
-            - mongo:mongo
-        depends_on:
-            - mongo
         restart: always
-    mongo:
-        image: ivanmarban/armhf-mongodb
-        ports:
-            - "27017:27017"
-        volumes:
-            - ./summarydb:/data/db            
-        restart: always
+        mem_limit: 512m

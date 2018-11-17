@@ -25,7 +25,7 @@ class SummaryServer extends HttpServer {
 
   override def jacksonModule = CustomJacksonModule
 
-  override def modules = Seq(SummaryModule, DatabaseModule, TurkishParserModule)
+  override def modules = Seq(SummaryModule, TurkishParserModule)
 
   override def defaultFinatraHttpPort = ":9999"
 
