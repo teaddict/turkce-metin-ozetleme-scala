@@ -36,7 +36,7 @@ class DefaultSummaryService @Inject()(summaryRepository: SummaryRepository,
         info("strongChains.size: " + strongChains.size)
         val extractedSentences = extractSentenceService.heuristic2(strongChains, sentences)
         val summary = new Summary(contextOfText = contextOfText,
-          summaryOfText = Some(extractedSentences.mkString),
+          summaryOfText = Some(extractedSentences.mkString(" ")),
           wordChain = Some(strongChains.flatMap(_.getChainInformation).mkString))
         Future(Right(summary))
       }

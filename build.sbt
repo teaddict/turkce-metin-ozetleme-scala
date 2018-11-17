@@ -6,8 +6,6 @@ version := "1.0.0-SNAPSHOT"
 
 scalaVersion := "2.11.8"
 
-dockerBaseImage := "nimmis/java:oracle-8-jdk"
-
 fork in run := true
 
 javaOptions ++= Seq(

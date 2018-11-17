@@ -73,7 +73,8 @@ Proceedings of the ACL Workshop on Intelligent Scalable Text Summarization,(1997
 > **Sunucu kurulumu :** 
 >- LINUX
 >- Terminal ile öncelikle uygulama dizinine geciyoruz
->- sbt docker:stage
+>- eger armv7 kullaniyorsak:  sbt 'set dockerBaseImage := "armv7/armhf-java8"' docker:stage
+>- eger kullanmiyorsak oracle veya openjdk secebilirsiniz: sbt 'set dockerBaseImage := "nimmis/java:oracle-8-jdk"' docker:stage
 >- sudo docker-compose -f docker-compose.yml up -d --build
 >- localhost:9999 adresinden sunucuya ulasabiliriz
 >- sunucuyu durdurmak icinse
