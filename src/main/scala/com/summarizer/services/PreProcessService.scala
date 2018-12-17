@@ -10,7 +10,9 @@ trait PreProcessService {
 
   def cleanStopWords(text: String): String
 
-  def getAllLexicals(text: String) : Seq[Lexical]
+  def getAllLexicals(paragraphsAndSentences: Map[Int, Seq[String]]): Seq[Lexical]
+
+  def parseTextToSentencesAndParagraphs(text: String) : Map[Int,Seq[String]]
 
 }
 
@@ -24,16 +26,26 @@ class DefaultPreProcessService @Inject()(nounService: NounService,
     stopWords.foldLeft(text)((a, b) => a.replaceAllLiterally(" " + b + " ", " ")).toString
   }
 
-  def getAllLexicals(text: String): Seq[Lexical] = {
-    info("Pre Process Service get all lexicals")
-    val paragraphs = paragraphService.getParagraphs(text)
-    val lexicals = paragraphs.zipWithIndex.flatMap { case (paragraph, paragraphIndexNo) =>
-      val sentences = sentenceService.getSentences(paragraph)
+  def getAllLexicals(paragraphsAndSentences: Map[Int, Seq[String]]): Seq[Lexical] = {
+    info("Pre Process Service get paragraphs and sentences")
+    val lexicals = paragraphsAndSentences.flatMap { case (paragraphNo, sentences) =>
       sentences.zipWithIndex.flatMap { case (sentence, sentenceIndexNo) =>
         val words = nounService.getNounsForSummary(sentence)
-        words.map(new Lexical(_, sentenceIndexNo, paragraphIndexNo))
+        words.map(new Lexical(_, sentenceIndexNo, paragraphNo))
       }
     }
-    lexicals
+    lexicals.toSeq
   }
+
+  def parseTextToSentencesAndParagraphs(text: String): Map[Int, Seq[String]] = {
+    info("Pre Process Service parse text to paragraphs and sentences")
+    var paragraphsAndSentences = Map.empty[Int, Seq[String]]
+    val paragraphs = paragraphService.getParagraphs(text)
+    paragraphs.zipWithIndex.foreach { case (paragraph, paragraphIndexNo) =>
+      val sentences = sentenceService.getSentences(paragraph)
+      paragraphsAndSentences += (paragraphIndexNo -> sentences)
+    }
+    paragraphsAndSentences
+  }
+
 }

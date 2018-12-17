@@ -6,7 +6,7 @@ import org.scalatest.FunSpec
 class LexicalChainServiceTest extends FunSpec {
 
   val lexicalChainService = new DefaultLexicalChainService
-  describe("Get verbs") {
+  describe("build chains") {
     it("should build chains") {
 
       val lexical1 = new Lexical("araba", 1, 1)

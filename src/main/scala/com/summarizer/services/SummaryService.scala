@@ -23,8 +23,8 @@ class DefaultSummaryService @Inject()(summaryRepository: SummaryRepository,
   override def create(contextOfText: String): Future[Either[String, Summary]] = {
     info("Summary service create")
     try {
-      val sentences = sentenceService.getSentences(contextOfText)
-      val lexicals = preProcessService.getAllLexicals(contextOfText)
+      val paragraphsAndSentences = preProcessService.parseTextToSentencesAndParagraphs(contextOfText)
+      val lexicals = preProcessService.getAllLexicals(paragraphsAndSentences)
       val chains = lexicalChainService.buildChains(lexicals)
       if (chains.isEmpty) {
         Future(Left("Summarizer can't create summary!"))
@@ -33,8 +33,7 @@ class DefaultSummaryService @Inject()(summaryRepository: SummaryRepository,
         val chainsWithScores = chainScoresService.calculateChainScores(uniqueChains)
         val chainsWithStrengths = chainScoresService.calculateChainStrengths(chainsWithScores)
         val strongChains = chainScoresService.getStrongChains(chainsWithStrengths)
-        info("strongChains.size: " + strongChains.size)
-        val extractedSentences = extractSentenceService.heuristic2(strongChains, sentences)
+        val extractedSentences = extractSentenceService.heuristic2(strongChains, paragraphsAndSentences)
         val summary = new Summary(contextOfText = contextOfText,
           summaryOfText = Some(extractedSentences.mkString(" ")),
           wordChain = Some(strongChains.flatMap(_.getChainInformation).mkString))

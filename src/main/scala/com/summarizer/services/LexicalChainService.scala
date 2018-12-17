@@ -27,9 +27,9 @@ class DefaultLexicalChainService extends LexicalChainService with Logging {
 
   def chainAnalyse(chains: Seq[Chain]) : Seq[Chain] = {
     info("Lexical Chain Service analyze chains")
-    val uniqueChains = collection.mutable.Map.empty[Seq[String], Chain]
+    val uniqueChains = collection.mutable.Map.empty[String, Chain]
     chains.foreach { chain =>
-      uniqueChains +=  (chain.getWordsOfChain -> chain)
+      uniqueChains +=  (chain.getWordsOfChain.toString() -> chain)
     }
 
     uniqueChains.values.toSeq
