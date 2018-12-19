@@ -34,9 +34,11 @@ class DefaultSummaryService @Inject()(summaryRepository: SummaryRepository,
         val chainsWithStrengths = chainScoresService.calculateChainStrengths(chainsWithScores)
         val strongChains = chainScoresService.getStrongChains(chainsWithStrengths)
         val extractedSentences = extractSentenceService.heuristic2(strongChains, paragraphsAndSentences)
+        val summaryOfText = extractedSentences.mkString(" ")
         val summary = new Summary(contextOfText = contextOfText,
-          summaryOfText = Some(extractedSentences.mkString(" ")),
+          summaryOfText = Some(summaryOfText),
           wordChain = Some(strongChains.flatMap(_.getChainInformation).mkString))
+        info(s"Summary = $summaryOfText")
         Future(Right(summary))
       }
     }
