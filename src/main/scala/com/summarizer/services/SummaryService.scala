@@ -38,7 +38,8 @@ class DefaultSummaryService @Inject()(summaryRepository: SummaryRepository,
         val summary = new Summary(contextOfText = contextOfText,
           summaryOfText = Some(summaryOfText),
           wordChain = Some(strongChains.flatMap(_.getChainInformation).mkString))
-        info(s"Summary = $summaryOfText")
+        info(s"contextOfText = $contextOfText")
+        info(s"summaryOfText = $summaryOfText")
         Future(Right(summary))
       }
     }
