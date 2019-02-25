@@ -1,5 +1,6 @@
 *.class
 *.log
+*.gz
 
 log*
 access*

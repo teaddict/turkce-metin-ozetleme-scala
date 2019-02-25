@@ -45,11 +45,14 @@ aşamalardan oluşmaktadır:
 ###### 
 > **Cümle Seçimi İşlemleri:**
 
->- Sezgisel Algoritma 1
+>- <b>Sezgisel Algoritma 1</b>   
 Bu algoritma her zincirdeki ilk kelimenin yani zinciri başlatan kelimenin anahtar kelime olarak alınmasına dayanmaktadır. Bu anahtar kelimenin geçtiği ilk cümle tespit edilerek seçilmiştir.
->- Sezgisel Algoritma 2
-Bu algoritma her zincirdeki kelimelerin frekansının hesaplanmasına dayanmaktadır. Öncelikle tüm kelimelerin frekansı hesaplanır ve zincirdeki kelimelerin frekans ortalaması bulunur. Ortalama frekansın üstündeki kelimeler işleme alınır. Bu kelimelerin ortak olarak geçtikleri bir cümle mevcut ise bu cümle seçilir, eğer hiçbir kelimenin kesiştiği bir cümle yoksa, en yüksek frekanslı cümlenin geçtiği cümle alınır.
->- Sezgisel Algoritma 3
+>- <b>Sezgisel Algoritma 2</b>    
+İlk önce kaç tane güçlü zincir olduğuna bakılır. 
+Sadece bir tane güçlü zincir varsa, bu zincirdeki tüm kelimelerin aynı olup olmadığına bakılır.Eğer aynıysa, zincirdeki ilk iki kelimenin ait olduğu cümle alınır. Eğer aynı değilse, zincirdeki farklı kelimeler seçilip, onların ait olduğu cümleler alınır.
+Birden fazla güçlü zincir varsa, tüm bu zincirler bir döngü içerisine alınır, amacımız her zincir için, o konuyu temsil eden bir cümle seçmek. Bunun için yine zincirde farklı kelimeler var mı diye bakıyoruz, eğer yoksa, zincirdeki ilk iki kelimenin ait olduğu cümle alınır.
+Zincirde farkli kelimeler mevcutsa, öncelikle tüm kelimelerin frekansı hesaplanır ve zincirdeki kelimelerin frekans ortalaması bulunur. Ortalama frekansın üstündeki kelimeler işleme alınır. Bu kelimelerin ortak olarak geçtikleri bir cümle mevcut ise bu cümle seçilir, eğer hiçbir kelimenin kesiştiği bir cümle yoksa, en yüksek frekanslı cümlenin geçtiği cümle alınır.
+>- <b>Sezgisel Algoritma 3</b>    
 Bu algoritma her zincirin yoğunlaştığı paragrafı bulmaya ve bu paragrafta zincirdeki
 kelimeleri içeren cümle frekansına dayanmaktadır. Eğer tüm kelimeler aynı paragraftaysa doğrudan bu paragraftaki cümlelerin analizi yapılır. Eğer zincirdeki kelimeler farklı paragraflardaysa öncelikle paragrafların frekansları alınır. En yüksek frekanslı paragraf seçilir ve bu paragraftaki cümlelerin analizi yapılır. Cümle analizi, öncelikle zincirdeki kelimelerin hangi cümlelerde geçtiği bilindiği için bu kelimeler paragraflara göre ayıklanır ve her paragraf içinde bu kelimelerin ait oldukları cümlelerin frekansı alınır. En yüksek frekanslı cümleyi o zincir için seçilmektedir.
 
@@ -100,7 +103,7 @@ Bu arada karşılaşmayı Gençlik ve Spor Bakanı Suat Kılıç, Türkiye Voley
 Yıldız Kızlar Dünya Şampiyonası FIVB'nin düzenlediği ve 18 yaşının altındaki voleybolcuların katılabildiği bir şampiyonadır.  İlk şampiyona 1989 yılında Brezilya'nın Curitiba kentinde yapılmıştır. Her iki yılda bir düzenlenen şampiyonaya kıta elemelerini geçen ülke takımları katılabilmektedir.
 
 > **Özet:**
-[Dünya Yıldız Kızlar Voleybol Şampiyonası'nda Yıldız Milli Takım, final maçında Çin'i 3-0 yenerek şampiyon oldu., Türkiye, böylece voleybol tarihinin ilk Dünya şampiyonluğunu elde etti., Yıldız Milli Takım, TVF Başkent Salonu'nda yapılan final maçında baştan sona üstün bir performans sergileyerek, Dünyanın en iyi takımları arasında yer alan Çin'e adeta göz açtırmadı.] 
+  Yıldız Kızlarımız Dünya Şampiyonu Dünya Yıldız Kızlar Voleybol Şampiyonası'nda Yıldız Milli Takım, final maçında Çin'i 3-0 yenerek şampiyon oldu. Türkiye, böylece voleybol tarihinin ilk Dünya şampiyonluğunu elde etti. Yıldız Milli Takım, TVF Başkent Salonu'nda yapılan final maçında baştan sona üstün bir performans sergileyerek, Dünyanın en iyi takımları arasında yer alan Çin'e adeta göz açtırmadı. Tüm oyuncuların iyi oynadığı Türk Milli Takımı'nda Kübra Akman performansıyla göz doldururken, Çin Milli Takımı'nın solak smaçörü Peiyi Liu, Yıldız kızları zorlayan en önemli oyuncu oldu. 
 
 > **Kelime Zincirleri**
 >- "P1 S2" kelimenin 1. paragrafdaki 2. cümlede  geçtiğini belirtir
@@ -155,7 +158,7 @@ Yıldız Kızlar Dünya Şampiyonası FIVB'nin düzenlediği ve 18 yaşının al
 >- Kelime zinciri kriter değeri: 3.8724132730465493
 
 > **JSON API RESPOND:**
->- {<b>"result"</b>:"[Dünya Yıldız Kızlar Voleybol Şampiyonası'nda Yıldız Milli Takım, final maçında Çin'i 3-0 yenerek şampiyon oldu., Türkiye, böylece voleybol tarihinin ilk Dünya şampiyonluğunu elde etti., Yıldız Milli Takım, TVF Başkent Salonu'nda yapılan final maçında baştan sona üstün bir performans sergileyerek, Dünyanın en iyi takımları arasında yer alan Çin'e adeta göz açtırmadı.] "
+>- {<b>"result"</b>:"[Yıldız Kızlarımız Dünya Şampiyonu Dünya Yıldız Kızlar Voleybol Şampiyonası'nda Yıldız Milli Takım, final maçında Çin'i 3-0 yenerek şampiyon oldu., Türkiye, böylece voleybol tarihinin ilk Dünya şampiyonluğunu elde etti., Yıldız Milli Takım, TVF Başkent Salonu'nda yapılan final maçında baştan sona üstün bir performans sergileyerek, Dünyanın en iyi takımları arasında yer alan Çin'e adeta göz açtırmadı., Tüm oyuncuların iyi oynadığı Türk Milli Takımı'nda Kübra Akman performansıyla göz doldururken, Çin Milli Takımı'nın solak smaçörü Peiyi Liu, Yıldız kızları zorlayan en önemli oyuncu oldu.] "
 }
 
 ----------

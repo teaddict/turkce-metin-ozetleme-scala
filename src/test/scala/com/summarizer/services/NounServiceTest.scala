@@ -11,7 +11,7 @@ class NounServiceTest extends FunSpec with CommonServices {
     it("should return all nouns") {
       val text = paragraph1.concat(paragraph2)
       val nouns = nounService.getNouns(text)
-      val result = Seq("dünya", "yıldız", "kız", "voleybol", "şampiyona", "yıldız", "mil", "takım", "final", "maç", "çin", "şampiyon", "türkiye", "voleybol", "tarih", "ilk", "dünya", "şampiyon", "el", "ilk", "şampiyona", "yıl", "brezilya", "curitiba", "kent", "yıl", "düz", "şampiyona", "kıta", "ele", "ülke", "takım")
+      val result = Seq("dünya", "yıldız", "kız", "voleybol", "şampiyona", "yıldız", "takım", "final", "maç", "çin", "şampiyon", "türkiye", "voleybol", "tarih", "dünya", "şampiyon", "el", "şampiyona", "yıl", "brezilya", "curitiba", "kent", "yıl", "şampiyona", "kıta", "ele", "ülke", "takım")
 
       assert(nouns === result)
     }

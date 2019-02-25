@@ -29,10 +29,10 @@ lazy val versions = new {
   val swagger = "0.5.0"
   val mongo = "2.1.0"
   val config = "1.3.2"
-  val zemberekCore = "0.13.0"
-  val zemberekTokenization = "0.13.0"
-  val zemberekMorphology = "0.13.0"
-  val zemberekNormalization = "0.13.0"
+  val zemberekCore = "0.16.0"
+  val zemberekTokenization = "0.16.0"
+  val zemberekMorphology = "0.16.0"
+  val zemberekNormalization = "0.16.0"
 
 }
 
