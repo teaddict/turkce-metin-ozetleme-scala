@@ -42,6 +42,33 @@ class ExtractSentenceServiceTest extends FunSpec {
   }
 
   describe("Heuristic Algorithm 2") {
+    it("should return correct sentences") {
+      val lexical1 = new Lexical("metin", 0, 0)
+      val lexical2 = new Lexical("metin", 3, 0)
+      val lexical3 = new Lexical("metin", 0, 1)
+      val lexical4 = new Lexical("metin", 0, 1)
+      val lexical5 = new Lexical("metin", 0, 1)
+      val lexical6 = new Lexical("metin", 2, 1)
+      val members = Seq((lexical1, "holo_part", "okunacak şey"), (lexical2, "holo_part", "okunacak şey"), (lexical3, "holo_part", "okunacak şey"),
+        (lexical4, "holo_part", "okunacak şey"), (lexical5, "holo_part", "okunacak şey"), (lexical6, "holo_part", "okunacak şey"))
+      val chain = Chain(members = members)
+      val sentencesFirstParagraph = Seq("Otomatik metin özetleme uygulamamız üniversite yıllarında geliştirilmeye başlamış ve TÜBİTAK tarafından ödüllendirilmiştir.",
+        "Açık kaynak yazılım olarak hala geliştirilmeye devam edilmektedir.",
+        "Bu yüzden yapacağınız her geri bildirim bizim için çok önem arz ediyor.",
+        "Uygulamayı kullanmak için internet bağlantınızın olması gerekiyor çünkü metin özetleme işlemi sunucumuzda yapılıyor.",
+        "Bunun dışında herhangi başka bir gereksinime ihtiyaç duymuyor.")
+      val sentencesSecondParagraph = Seq("Bu uygulamayla tartışma metinlerinizi, makalelerinizi, bilimsel metinlerinizi, tarih metinlerinizi ve analiz çalışmalarınızı özetlemenize ve analiz etmenize yardımcı olmak istiyoruz.",
+        "Belgelerinizin önemli fikirlerini tanımlayan ve özetleyen bir eğitim aracıdır.",
+        "Tek Tıklamayla özetleyin, ana fikre gidin ya da basitleştirin, böylece metinlerinizi hızlı bir şekilde yorumlayabilirsiniz.")
+      var paragraphsAndSentences = Map(0 -> sentencesFirstParagraph, 1 -> sentencesSecondParagraph)
+
+      val result = extractSentenceService.heuristic2(Seq(chain), paragraphsAndSentences)
+      val expectedResult = Seq("Otomatik metin özetleme uygulamamız üniversite yıllarında geliştirilmeye başlamış ve TÜBİTAK tarafından ödüllendirilmiştir.",
+        "Uygulamayı kullanmak için internet bağlantınızın olması gerekiyor çünkü metin özetleme işlemi sunucumuzda yapılıyor.")
+
+      result === expectedResult
+
+    }
 
   }
 

@@ -97,7 +97,7 @@ class DefaultExtractSentenceService extends ExtractSentenceService with Logging 
         if (values.size > 1) {
           val (secondSelectedParagraphNo,secondSelectedSentenceNo) = values(1)
           val sentences =  paragraphsAndSentences(secondSelectedParagraphNo)
-          selectedSentences += ((secondSelectedParagraphNo,secondSelectedSentenceNo) -> sentences(secondSelectedParagraphNo))
+          selectedSentences += ((secondSelectedParagraphNo,secondSelectedSentenceNo) -> sentences(secondSelectedSentenceNo))
         }
       } else {
         uniqueWords.foreach { word =>
@@ -145,7 +145,7 @@ class DefaultExtractSentenceService extends ExtractSentenceService with Logging 
       }
     }
     val sortedSelectedSentences = ListMap(selectedSentences.toSeq.sortBy(_._1): _*)
-    val result = sortedSelectedSentences.values.toSeq
+    val result = sortedSelectedSentences.values.toSet.toSeq
     result
   }
 }
