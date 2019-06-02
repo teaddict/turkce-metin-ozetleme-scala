@@ -145,7 +145,7 @@ class DefaultExtractSentenceService extends ExtractSentenceService with Logging 
       }
     }
     val sortedSelectedSentences = ListMap(selectedSentences.toSeq.sortBy(_._1): _*)
-    val result = sortedSelectedSentences.values.toSet.toSeq
+    val result = sortedSelectedSentences.values.toSeq
     result
   }
 }
