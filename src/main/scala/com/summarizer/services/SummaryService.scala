@@ -23,6 +23,7 @@ class DefaultSummaryService @Inject()(summaryRepository: SummaryRepository,
   override def create(contextOfText: String): Future[Either[String, Summary]] = {
     info("Summary service create")
     try {
+      val start = System.currentTimeMillis()
       val paragraphsAndSentences = preProcessService.parseTextToSentencesAndParagraphs(contextOfText)
       val lexicals = preProcessService.getAllLexicals(paragraphsAndSentences)
       val chains = lexicalChainService.buildChains(lexicals)
@@ -40,6 +41,8 @@ class DefaultSummaryService @Inject()(summaryRepository: SummaryRepository,
           wordChain = Some(strongChains.flatMap(_.getChainInformation).mkString))
         info(s"contextOfText = $contextOfText")
         info(s"summaryOfText = $summaryOfText")
+       val end = System.currentTimeMillis()
+        println(end-start)
         Future(Right(summary))
       }
     }

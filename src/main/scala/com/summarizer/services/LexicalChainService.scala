@@ -56,7 +56,7 @@ class DefaultLexicalChainService extends LexicalChainService with Logging {
               val relatedWord = result(2)
               mapOfChains.get(relatedWord) match {
                 case Some(chain) => chain.addLexicalToChain(lexical, relationType, relatedWord)
-                case None => mapOfChains(relatedWord) = Chain(None, 0, 0.0, Seq((lexical, relationType, relatedWord)))
+                case None => mapOfChains(relatedWord) = Chain(None, 0, 0.0, List((lexical, relationType, relatedWord)))
               }
             }
           }

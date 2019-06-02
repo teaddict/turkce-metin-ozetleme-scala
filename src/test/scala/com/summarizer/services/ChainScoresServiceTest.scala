@@ -8,7 +8,7 @@ class ChainScoresServiceTest extends FlatSpec {
   val lexical1 = new Lexical("araba",1,1)
   val lexical2 = new Lexical("otobus",1,2)
   val lexical3 = new Lexical("araba",1,3)
-  val members = Seq((lexical1,"hypernymy","taşıt"),
+  val members = List((lexical1,"hypernymy","taşıt"),
                     (lexical2,"hypernymy","taşıt"),
                     (lexical3,"hypernymy","taşıt"))
   val chain = Chain(members = members)
@@ -36,7 +36,7 @@ class ChainScoresServiceTest extends FlatSpec {
     val lexical4 = new Lexical("derviş",1,1)
     val lexical5 = new Lexical("denetçi",1,2)
     val lexical6 = new Lexical("insan",1,3)
-    val members2 = Seq((lexical4,"hypernymy","kişi"),
+    val members2 = List((lexical4,"hypernymy","kişi"),
                        (lexical5,"hypernymy","kişi"),
                        (lexical6,"synonymy","kişi"))
 
