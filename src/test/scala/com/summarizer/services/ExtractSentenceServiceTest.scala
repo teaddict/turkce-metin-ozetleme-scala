@@ -12,7 +12,7 @@ class ExtractSentenceServiceTest extends FunSpec {
       val lexical1 = new Lexical("araba",1,1)
       val lexical2 = new Lexical("otobus",2,1)
       val lexical3 = new Lexical("araba",3,1)
-      val members = Seq((lexical1,"hypernymy","taşıt"),
+      val members = List((lexical1,"hypernymy","taşıt"),
                         (lexical2,"hypernymy","taşıt"),
                         (lexical3,"hypernymy","taşıt"))
       val chain = Chain(members = members)
@@ -20,7 +20,7 @@ class ExtractSentenceServiceTest extends FunSpec {
       val lexical4 = new Lexical("çay",4,2)
       val lexical5 = new Lexical("kahve",5,2)
       val lexical6 = new Lexical("su",6,2)
-      val members2 = Seq((lexical4,"hypernymy","içecek"),
+      val members2 = List((lexical4,"hypernymy","içecek"),
                         (lexical5,"hypernymy","içecek"),
                         (lexical6,"hypernymy","içecek"))
       val secondChain = Chain(members = members2)
@@ -49,7 +49,7 @@ class ExtractSentenceServiceTest extends FunSpec {
       val lexical4 = new Lexical("metin", 0, 1)
       val lexical5 = new Lexical("metin", 0, 1)
       val lexical6 = new Lexical("metin", 2, 1)
-      val members = Seq((lexical1, "holo_part", "okunacak şey"), (lexical2, "holo_part", "okunacak şey"), (lexical3, "holo_part", "okunacak şey"),
+      val members = List((lexical1, "holo_part", "okunacak şey"), (lexical2, "holo_part", "okunacak şey"), (lexical3, "holo_part", "okunacak şey"),
         (lexical4, "holo_part", "okunacak şey"), (lexical5, "holo_part", "okunacak şey"), (lexical6, "holo_part", "okunacak şey"))
       val chain = Chain(members = members)
       val sentencesFirstParagraph = Seq("Otomatik metin özetleme uygulamamız üniversite yıllarında geliştirilmeye başlamış ve TÜBİTAK tarafından ödüllendirilmiştir.",

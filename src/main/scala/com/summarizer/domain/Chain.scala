@@ -3,7 +3,7 @@ package com.summarizer.domain
 case class Chain (var subjectOfChain : Option[String] = None,
              var score : Int = 0,
              var strength : Double = 0.0,
-             var members : Seq[(Lexical, String, String)]) { //lexical, relationType, relatedWord
+             var members : List[(Lexical, String, String)]) { //lexical, relationType, relatedWord
 
   def addLexicalToChain(lexical: Lexical, relationType: String, relatedWord: String) = {
     this.members = this.members :+ (lexical, relationType, relatedWord)
@@ -26,7 +26,7 @@ case class Chain (var subjectOfChain : Option[String] = None,
     this.members.find(_._1.getWord() == lexical.getWord())
   }
 
-  def getMembers: Seq[(Lexical, String, String)] = {
+  def getMembers: List[(Lexical, String, String)] = {
     this.members
   }
 
