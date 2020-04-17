@@ -14,7 +14,9 @@ trait ExtractSentenceService extends Logging {
 
   def getFrequencyOfWords(words: Seq[String]): Map[String, Int]
 
-  def heuristic2(chains: Seq[Chain], paragraphsAndSentences: Map[Int, Seq[String]]): Seq[String]
+  def heuristic2(chains: Seq[Chain],
+                 paragraphsAndSentences: Map[Int, Seq[String]],
+                 paragraphsAndSentencesWithoutHelperWords: Map[Int, Seq[String]]): Seq[String]
 
 }
 
@@ -76,7 +78,9 @@ class DefaultExtractSentenceService extends ExtractSentenceService with Logging 
     frequency
   }
 
-  def heuristic2(chains: Seq[Chain], paragraphsAndSentences: Map[Int, Seq[String]]): Seq[String] = {
+  def heuristic2(chains: Seq[Chain],
+                 paragraphsAndSentences: Map[Int, Seq[String]],
+                 paragraphsAndSentencesWithoutHelperWords: Map[Int, Seq[String]]): Seq[String] = {
     info("Extract Sentence Service heuristic algorithm 2")
     var selectedSentences = Map.empty[(Int, Int), String]
     var representativeWords = Set.empty[String]
@@ -145,7 +149,15 @@ class DefaultExtractSentenceService extends ExtractSentenceService with Logging 
       }
     }
     val sortedSelectedSentences = ListMap(selectedSentences.toSeq.sortBy(_._1): _*)
-    val result = sortedSelectedSentences.values.toSeq
-    result
+    val replaceSelectedSenteces = sortedSelectedSentences.map { info =>
+      val sentencesWithoutHelperWords = paragraphsAndSentencesWithoutHelperWords(info._1._1)
+      val sentence = sentencesWithoutHelperWords(info._1._2)
+      if (sentence.matches(".*\\p{Punct}")) {
+        sentence
+      } else {
+        sentence + "\n"
+      }
+    }.toSeq
+    replaceSelectedSenteces
   }
 }

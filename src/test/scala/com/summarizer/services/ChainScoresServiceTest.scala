@@ -2,15 +2,20 @@ package com.summarizer.services
 
 import com.summarizer.domain.{Chain, Lexical}
 import org.scalatest.FlatSpec
+import org.scalatest.Matchers._
 
 class ChainScoresServiceTest extends FlatSpec {
 
   val lexical1 = new Lexical("araba",1,1)
-  val lexical2 = new Lexical("otobus",1,2)
-  val lexical3 = new Lexical("araba",1,3)
+  val lexical2 = new Lexical("otobüs",1,2)
+  val lexical3 = new Lexical("uçak",1,3)
+  val lexical4 = new Lexical("araba",1,4)
+  val lexical5 = new Lexical("otobüs",1,5)
   val members = List((lexical1,"hypernymy","taşıt"),
                     (lexical2,"hypernymy","taşıt"),
-                    (lexical3,"hypernymy","taşıt"))
+                    (lexical3,"hypernymy","taşıt"),
+                    (lexical4,"hypernymy","taşıt"),
+                    (lexical5,"hypernymy","taşıt"))
   val chain = Chain(members = members)
 
   val chainScoresService = new DefaultChainScoresService
@@ -21,14 +26,14 @@ class ChainScoresServiceTest extends FlatSpec {
  */
   it should "calculate Chain Scores correctly" in {
     val result = chainScoresService.calculateChainScores(Seq(chain))
-    val expectedResult = 12
-    result.head.score === expectedResult
+    val expectedResult = 20
+    result.head.score shouldBe expectedResult
   }
 
   it should "calculate Chain Strength correctly" in {
     val result = chainScoresService.calculateChainStrengths(Seq(chain))
-    val expectedResult = 0.99999999999
-    result.head.strength === expectedResult
+    val expectedResult = 2.0
+    result.head.strength shouldBe expectedResult
   }
 
 
@@ -40,12 +45,11 @@ class ChainScoresServiceTest extends FlatSpec {
                        (lexical5,"hypernymy","kişi"),
                        (lexical6,"synonymy","kişi"))
 
-    val chain1 = Chain(score = 12, strength =0.99999999999, members = members)
+    val chain1 = Chain(score = 20, strength =2.0, members = members)
     val chain2 = Chain(score = 18, members = members2)
 
     val result = chainScoresService.getStrongChains(Seq(chain1,chain2))
-    val expectedResult = Seq(chain1)
-    result.head === expectedResult
+    result.head shouldBe chain1
   }
 
 }
