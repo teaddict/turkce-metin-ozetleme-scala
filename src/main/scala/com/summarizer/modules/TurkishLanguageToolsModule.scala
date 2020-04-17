@@ -24,7 +24,15 @@ object TurkishLanguageToolsModule extends TwitterModule {
     file.split("\n").toSeq
   }
 
+  private val helperWordList = {
+    val resourcesPath = "lexical/helperWords.csv"
+    val file = fileService.readFile(resourcesPath)
+    file.split("\n").toSeq
+  }
+
   def getSemanticRelationWordList : Map[String, Seq[String]] = semanticRelationWordList
 
   def getStopWordList :  Seq[String] = stopWordList
+
+  def getHelperWordList :  Seq[String] = helperWordList
 }

@@ -24,6 +24,7 @@ class DefaultSummaryService @Inject()(summaryRepository: SummaryRepository,
     info("Summary service create")
     try {
       val start = System.currentTimeMillis()
+      val paragraphsAndSentencesWithoutHelperWords = preProcessService.paragraphsAndSentencesWithoutHelperWords(contextOfText)
       val paragraphsAndSentences = preProcessService.parseTextToSentencesAndParagraphs(contextOfText)
       val lexicals = preProcessService.getAllLexicals(paragraphsAndSentences)
       val chains = lexicalChainService.buildChains(lexicals)
@@ -34,9 +35,9 @@ class DefaultSummaryService @Inject()(summaryRepository: SummaryRepository,
         val chainsWithScores = chainScoresService.calculateChainScores(uniqueChains)
         val chainsWithStrengths = chainScoresService.calculateChainStrengths(chainsWithScores)
         val strongChains = chainScoresService.getStrongChains(chainsWithStrengths)
-        val extractedSentences = extractSentenceService.heuristic2(strongChains, paragraphsAndSentences)
+        val extractedSentences = extractSentenceService.heuristic2(strongChains, paragraphsAndSentences, paragraphsAndSentencesWithoutHelperWords)
         val summaryOfText = extractedSentences.mkString(" ")
-        val summary = new Summary(contextOfText = contextOfText,
+        val summary = Summary(contextOfText = contextOfText,
           summaryOfText = Some(summaryOfText),
           wordChain = Some(strongChains.flatMap(_.getChainInformation).mkString))
         info(s"contextOfText = $contextOfText")
