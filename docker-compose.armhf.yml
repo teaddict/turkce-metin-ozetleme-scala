@@ -5,4 +5,4 @@ services:
         ports:
             - "9999:9999"
         restart: always
-        mem_limit: 512m
+        mem_limit: 1024m
