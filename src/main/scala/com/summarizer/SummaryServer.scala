@@ -1,7 +1,7 @@
 package com.summarizer
 
 import com.summarizer.controllers._
-import com.summarizer.modules.{CustomJacksonModule, DatabaseModule, SummaryModule, TurkishParserModule}
+import com.summarizer.modules.{CustomJacksonModule, SummaryModule, TurkishParserModule}
 import com.summarizer.swagger.SummarySwaggerDocument
 import com.summarizer.warmup.WarmupHandler
 import com.github.xiaodongw.swagger.finatra.SwaggerController

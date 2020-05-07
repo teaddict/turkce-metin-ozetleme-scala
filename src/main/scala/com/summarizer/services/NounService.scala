@@ -46,14 +46,12 @@ class DefaultNounService @Inject() (sentenceService: SentenceService,
   }
 
   override def getNouns(text: String): Seq[String] = {
-    info("Noun Service get nouns")
     val analyses = getAnalyses(text)
     val nouns = analyses.flatMap(analysis => handleAnalyses(analysis))
     nouns
   }
 
   override def getNounsForSummary(text: String): Seq[String] = {
-    info("Noun Service get nouns for summary")
     val wordAnalysis = turkishMorphology.analyzeAndDisambiguate(text)
     val nouns = handleAnalyses(wordAnalysis)
     nouns
