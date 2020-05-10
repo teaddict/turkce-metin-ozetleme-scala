@@ -40,7 +40,7 @@ class DefaultSummaryService @Inject()(preProcessService: PreProcessService,
           val summaryOfText = extractedSentences.mkString(" ")
           val summary = Summary(contextOfText = contextOfText,
             summaryOfText = Some(summaryOfText),
-            wordChain = Some(strongChains.flatMap(_.getChainInformation).mkString))
+            wordChain = None)
           info(s"contextOfText = $contextOfText")
           info(s"summaryOfText = $summaryOfText")
           val end = System.currentTimeMillis()
