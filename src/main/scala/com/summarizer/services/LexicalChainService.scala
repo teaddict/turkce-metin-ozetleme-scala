@@ -45,11 +45,11 @@ class DefaultLexicalChainService extends LexicalChainService with Logging {
    */
   def buildChains(lexicals: Seq[Lexical]): Seq[Chain] = {
     info("Lexical Chain Service build chains")
-    var mapOfChains = scala.collection.mutable.Map[String, Chain]()
+    val mapOfChains = scala.collection.mutable.Map[String, Chain]()
     val wordnet = TurkishLanguageToolsModule.getSemanticRelationWordList
     lexicals.foreach { lexical =>
         wordnet.get(lexical.getWord()) match {
-          case Some(semanticRelations) => {
+          case Some(semanticRelations) =>
             for (semanticRelation <- semanticRelations) {
               val result = semanticRelation.split(":")
               val relationType = result(1)
@@ -59,7 +59,6 @@ class DefaultLexicalChainService extends LexicalChainService with Logging {
                 case None => mapOfChains(relatedWord) = Chain(None, 0, 0.0, List((lexical, relationType, relatedWord)))
               }
             }
-          }
           case None =>
         }
       }

@@ -14,11 +14,9 @@ trait SummaryService {
 
 @Singleton
 class DefaultSummaryService @Inject()(preProcessService: PreProcessService,
-                                      nounService: NounService,
                                       lexicalChainService: LexicalChainService,
                                       chainScoresService: ChainScoresService,
-                                      extractSentenceService: ExtractSentenceService,
-                                      sentenceService: SentenceService) extends SummaryService with Logging {
+                                      extractSentenceService: ExtractSentenceService) extends SummaryService with Logging {
 
   override def create(contextOfText: String): Future[Either[String, Summary]] = {
     info("Summary service create")
