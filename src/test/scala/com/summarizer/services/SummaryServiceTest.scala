@@ -11,7 +11,7 @@ class SummaryServiceTest extends FunSpec with CommonServices with Mockito {
     val lexicalChainService = new DefaultLexicalChainService
     val chainScoresService = new DefaultChainScoresService
     val extractSentenceService = new DefaultExtractSentenceService
-    val summaryService = new DefaultSummaryService(preProcessService, nounService, lexicalChainService, chainScoresService, extractSentenceService, sentenceService)
+    val summaryService = new DefaultSummaryService(preProcessService, lexicalChainService, chainScoresService, extractSentenceService)
     val fileService = new DefaultFileService
     it("should create summary") {
       val fileResourcesPath = "text/1.txt"

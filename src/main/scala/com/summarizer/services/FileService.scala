@@ -21,7 +21,7 @@ trait FileService extends Logging {
 class DefaultFileService extends FileService {
 
   def readFile(path: String): String = {
-    val source = Source.fromInputStream(getClass().getClassLoader().getResourceAsStream(path))(Codec.UTF8)
+    val source = Source.fromInputStream(getClass.getClassLoader.getResourceAsStream(path))(Codec.UTF8)
     val text = try source.mkString finally source.close()
     text
   }

@@ -110,7 +110,7 @@ class DefaultExtractSentenceService extends ExtractSentenceService with Logging 
           for (lexical <- lexicals; if sentenceNotAdded) {
             val (paragraphNo,sentenceNo) = (lexical.getParagraphNo(), lexical.getSentenceNo())
             representativeWords += lexical.getWord()
-            if (selectedSentences.get((paragraphNo, sentenceNo)).isEmpty) {
+            if (!selectedSentences.contains((paragraphNo, sentenceNo))) {
               val sentences =  paragraphsAndSentences(paragraphNo)
               selectedSentences += ((paragraphNo,sentenceNo) -> sentences(sentenceNo))
               sentenceNotAdded = false
@@ -127,7 +127,7 @@ class DefaultExtractSentenceService extends ExtractSentenceService with Logging 
           val lexical = chain.members.map(_._1).head
           val (paragraphNo, sentenceNo) = (lexical.getParagraphNo(), lexical.getSentenceNo())
           val sentences = paragraphsAndSentences(paragraphNo)
-          if (selectedSentences.get((paragraphNo, sentenceNo)).isEmpty) {
+          if (!selectedSentences.contains((paragraphNo, sentenceNo))) {
             selectedSentences += ((paragraphNo, sentenceNo) -> sentences(sentenceNo))
           }
         } else {
@@ -139,7 +139,7 @@ class DefaultExtractSentenceService extends ExtractSentenceService with Logging 
           for (lexical <- lexicals; if sentenceNotAdded) {
             val (paragraphNo, sentenceNo) = (lexical.getParagraphNo(), lexical.getSentenceNo())
             representativeWords += lexical.getWord()
-            if (selectedSentences.get((paragraphNo, sentenceNo)).isEmpty) {
+            if (!selectedSentences.contains((paragraphNo, sentenceNo))) {
               val sentences = paragraphsAndSentences(paragraphNo)
               selectedSentences += ((paragraphNo, sentenceNo) -> sentences(sentenceNo))
               sentenceNotAdded = false
